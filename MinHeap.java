@@ -1,8 +1,5 @@
 /*
- *  CS220 Assignment 2
  *  Richard Downer
- *  rdow035
- *  1414352
  *  
  *  Using Min Binary Heap
  *  Insert to k elements
