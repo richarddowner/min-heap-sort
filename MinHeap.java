@@ -75,23 +75,7 @@ public class MinHeap {
 	  } catch(Exception e) {
 		  System.out.println(e);
 	  }	  
-  }
-  
-  /*
-  public static void insertion_srt(List<MP3SongData>a, int left, int right){
-		for (int i = left; i < right; i++){
-			int j = i;
-			MP3SongData B = a.get(i);
-			while ((j > 0) && (a.get(j-1).compare(B)) == 1){
-				//array[j] = array[j-1];
-				a.set(j, a.get(j-1));
-				j--;
-			}
-			//array[j] = B;
-			a.set(j, B);
-		}
-	}
-	*/
+  }  
 }
 
 
