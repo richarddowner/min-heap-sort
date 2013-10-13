@@ -7,7 +7,7 @@
  *  is larger than min element in
  *  the heap.
  *  If so, insert then delete min.
- *  else do nothing
+ *  else do nothing.
  *  
  */
 import java.util.*;
