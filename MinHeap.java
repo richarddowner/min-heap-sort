@@ -14,10 +14,8 @@ import java.util.*;
 import java.io.*;
 public class MinHeap {
 
-  public static void main(String[] args) {
-	  
-	  try {
-		  
+  public static void main(String[] args) {	  
+	  try {		  
 		  BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		  int k = Integer.parseInt(br.readLine().trim());
 		  String separator = br.readLine().trim();
@@ -39,39 +37,37 @@ public class MinHeap {
 					  
 					  MP3SongData s = new MP3SongData(totalData[0], totalData[1], Integer.parseInt(totalData[2].trim()));
 					  
-					  // The Magic:
 					  if(countRecords < k) {
-				    	  // Add in all first k elements
-				    	  heap.add(s);
-				    	  countRecords++;
-				      } else {
-				    	  // After k elements are inserted
-				    	  // Only if s is larger than min add s into heap
-				    	  // then delete smallest from heap
-				    	  if(s.compare(heap.min()) == 1) {
-				    	  	 heap.add(s);
-				    	  	 heap.remove();
-				    	  } 
-				      } 
+			    	  // Add in all first k elements
+			    	  heap.add(s);
+			    	  countRecords++;
+			      } else {
+			    	  // After k elements are inserted
+			    	  // Only if s is larger than min add s into heap
+			    	  // then delete smallest from heap
+			    	  if(s.compare(heap.min()) == 1) {
+  		    	  	heap.add(s);
+  		    	  	heap.remove();
+			    	  } 
+			      } 
 				  }
 				  
 				  int i=0;
-			      while(!heap.isEmpty()) {
-			    	  
-			    	  records[i] = heap.remove();
-			    	  i++;
-			      }
-			      for(int j=k-1; j>=0; j--) {
-			    	  if(records[j] != null) {
-			    		  System.out.println(records[j]);
-			    	  }
-			      } 
-				  
+		      while(!heap.isEmpty()) {
+		    	  
+		    	  records[i] = heap.remove();
+		    	  i++;
+		      }
+		      
+          for(int j=k-1; j>=0; j--) {
+		    	  if(records[j] != null) {
+		    		  System.out.println(records[j]);
+		    	  }
+		      }
 			  } finally {
 				  br.close();
 			  }
-		  }
-		  
+		  }		  
 	  } catch(Exception e) {
 		  System.out.println(e);
 	  }	  
@@ -135,71 +131,70 @@ class BinaryHeapMin {
 
 class MP3SongData {
 
-    private String songTitle;
-    private String songAuthor;
-    private int songRunTime;
+  private String songTitle;
+  private String songAuthor;
+  private int songRunTime;
 
-    public MP3SongData() {}
-    
-    public MP3SongData(String title, String author, int runTime) {
-    	this.songTitle = title;
-    	this.songAuthor = author;
-    	this.songRunTime = runTime;
+  public MP3SongData() {}
+  
+  public MP3SongData(String title, String author, int runTime) {
+  	this.songTitle = title;
+  	this.songAuthor = author;
+  	this.songRunTime = runTime;
+  }
+
+  public String getSongTitle() {
+    return this.songTitle;
+  }
+
+  public String getSongAuthor() {
+    return this.songAuthor;
+  }
+
+  public int getSongRunTime() {
+    return this.songRunTime;
+  }
+
+  public void setSongTitle(String title) {
+    this.songTitle = title;
+  }
+
+  public void setSongAuthor(String author) {
+    this.songAuthor = author;
+  }
+
+  public void setSongRunTime(int runTime) {
+    this.songRunTime = runTime;
+  }
+  
+  public int compare(MP3SongData o2) {
+    if(this.songRunTime > o2.getSongRunTime()) {
+      return 1;
     }
-
-    public String getSongTitle() {
-            return this.songTitle;
+    if(this.songRunTime < o2.getSongRunTime()) {
+      return -1;
     }
+    if(this.songRunTime == o2.getSongRunTime()) {
 
-    public String getSongAuthor() {
-            return this.songAuthor;
-    }
-
-    public int getSongRunTime() {
-            return this.songRunTime;
-    }
-
-    public void setSongTitle(String title) {
-            this.songTitle = title;
-    }
-
-    public void setSongAuthor(String author) {
-            this.songAuthor = author;
-    }
-
-    public void setSongRunTime(int runTime) {
-            this.songRunTime = runTime;
-    }
-    
-    public int compare(MP3SongData o2) {
-        if(this.songRunTime > o2.getSongRunTime()) {
-                return 1;
-        }
-        if(this.songRunTime < o2.getSongRunTime()) {
-                return -1;
-        }
-        if(this.songRunTime == o2.getSongRunTime()) {
-
-                if(this.songTitle.compareTo(o2.getSongTitle()) > 0) {
-                        return -1;
-                }
-                if(this.songTitle.compareTo(o2.getSongTitle()) < 0) {
-                        return 1;
-                }
-                if(this.songTitle.compareTo(o2.getSongTitle()) == 0) {
-                        if(this.songAuthor.compareTo(o2.getSongAuthor()) < 0) {
-                                return 1;
-                        }
-                        if(this.songAuthor.compareTo(o2.getSongAuthor()) > 0) {
-                                return -1;
-                        }
-                }
-        }
+      if(this.songTitle.compareTo(o2.getSongTitle()) > 0) {
+        return -1;
+      }
+      if(this.songTitle.compareTo(o2.getSongTitle()) < 0) {
         return 1;
-    } 
-
-    public String toString(){
-            return songTitle + "&" + songAuthor + "&" + songRunTime;
+      }
+      if(this.songTitle.compareTo(o2.getSongTitle()) == 0) {
+        if(this.songAuthor.compareTo(o2.getSongAuthor()) < 0) {
+          return 1;
+        }
+        if(this.songAuthor.compareTo(o2.getSongAuthor()) > 0) {
+          return -1;
+        }
+      }
     }
+    return 1;
+  }
 
+  public String toString(){
+    return songTitle + "&" + songAuthor + "&" + songRunTime;
+  }
 }
