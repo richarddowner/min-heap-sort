@@ -15,65 +15,64 @@ import java.io.*;
 public class MinHeap {
 
   public static void main(String[] args) {	  
-	  try {		  
-		  BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		  int k = Integer.parseInt(br.readLine().trim());
-		  String separator = br.readLine().trim();
+    try {		  
+      BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+      int k = Integer.parseInt(br.readLine().trim());
+      String separator = br.readLine().trim();
 		  
-		  if (k != 0) { // If k is 0 there is nothing to sort.
+      if (k != 0) { // If k is 0 there is nothing to sort.
 			  
-			  int countRecords = 0;
-			  BinaryHeapMin heap = new BinaryHeapMin();
-			  
-			  MP3SongData records[] = new MP3SongData[k];
-			  
-			  try {
-				  
-				  String[] totalData = null;
-				  String data = null;
-				  
-				  while((data = br.readLine()) != null) {
-					  totalData = data.trim().split(separator);
-					  
-					  MP3SongData s = new MP3SongData(totalData[0], totalData[1], Integer.parseInt(totalData[2].trim()));
-					  
-					  if(countRecords < k) {
-			    	  // Add in all first k elements
-			    	  heap.add(s);
-			    	  countRecords++;
-			      } else {
-			    	  // After k elements are inserted
-			    	  // Only if s is larger than min add s into heap
-			    	  // then delete smallest from heap
-			    	  if(s.compare(heap.min()) == 1) {
-  		    	  	heap.add(s);
-  		    	  	heap.remove();
-			    	  } 
-			      } 
-				  }
-				  
-				  int i=0;
-		      while(!heap.isEmpty()) {
-		    	  
-		    	  records[i] = heap.remove();
-		    	  i++;
-		      }
-		      
+        int countRecords = 0;
+        BinaryHeapMin heap = new BinaryHeapMin();
+
+        MP3SongData records[] = new MP3SongData[k];
+
+        try {
+          
+          String[] totalData = null;
+          String data = null;
+
+          while((data = br.readLine()) != null) {
+            totalData = data.trim().split(separator);
+
+            MP3SongData s = new MP3SongData(totalData[0], totalData[1], Integer.parseInt(totalData[2].trim()));
+
+            if(countRecords < k) {
+              // Add in all first k elements
+              heap.add(s);
+              countRecords++;
+            } else {
+              // After k elements are inserted
+              // Only if s is larger than min add s into heap
+              // then delete smallest from heap
+              if(s.compare(heap.min()) == 1) {
+              	heap.add(s);
+              	heap.remove();
+              } 
+            } 
+          }
+
+          int i=0;
+          while(!heap.isEmpty()) {            
+            records[i] = heap.remove();
+            i++;
+          }
+
           for(int j=k-1; j>=0; j--) {
-		    	  if(records[j] != null) {
-		    		  System.out.println(records[j]);
-		    	  }
-		      }
-			  } finally {
-				  br.close();
-			  }
-		  }		  
-	  } catch(Exception e) {
-		  System.out.println(e);
-	  }	  
+            if(records[j] != null) {
+              System.out.println(records[j]);
+            }
+          }
+
+        } finally {
+          br.close();
+        }
+      }		  
+    } catch(Exception e) {
+      System.out.println(e);
+    }	  
   }  
 }
-
 
 class BinaryHeapMin {
   List<MP3SongData> h = new ArrayList<MP3SongData>();
